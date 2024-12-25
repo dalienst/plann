@@ -21,7 +21,6 @@ function ForgotPassword() {
             toast.success("Email sent successfully");
             router.push("/auth/password-reset");
           } catch (error) {
-            console.log(error?.response?.data?.email[0]);
             if (error?.response?.data?.email[0]) {
               toast.error("Account with this email does not exist!");
             } else {
