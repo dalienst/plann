@@ -30,30 +30,62 @@ function Login() {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit" disabled={loading} className="btn btn-dark">
-          {loading ? "Logging in..." : "Login"}
-        </button>
-        <p>
-          Forgot Password?{" "}
-          <Link href="/auth/forgot-password">Reset Password</Link>
-        </p>
-        <p>
-          Don't have an account? <Link href="/auth/signup">Signup</Link>
-        </p>
+    <div className="auth-screen">
+      <form onSubmit={handleSubmit} className="shadow p-4 bg-white rounded">
+        <h2 className="text-center mb-4">Login</h2>
+
+        <div className="mb-3">
+          <label htmlFor="email" className="form-label">
+            Enter Email
+          </label>
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="form-control rounded-0"
+            required
+          />
+        </div>
+
+        <div className="mb-3">
+          <label htmlFor="password" className="form-label">
+            Enter Password
+          </label>
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="form-control rounded-0"
+            required
+          />
+        </div>
+
+        <div className="d-flex justify-content-center mb-3">
+          <button
+            type="submit"
+            className="btn btn-dark rounded-0 w-100"
+            disabled={loading}
+          >
+            {loading ? "Logging in..." : "Login"}
+          </button>
+        </div>
+
+        <div className="text-center">
+          <p>
+            Forgot Password?{" "}
+            <Link href="/auth/forgot-password" className="text-primary">
+              Reset Password
+            </Link>
+          </p>
+          <p>
+            Don't have an account?{" "}
+            <Link href="/auth/signup" className="text-primary">
+              Signup
+            </Link>
+          </p>
+        </div>
       </form>
     </div>
   );
