@@ -19,10 +19,14 @@ function ForgotPassword() {
           try {
             await forgotPasswordRequest(values);
             toast.success("Email sent successfully");
-            router.push("/auth/login");
+            router.push("/auth/password-reset");
           } catch (error) {
-            console.log(error);
-            toast.error("Email not sent");
+            console.log(error?.response?.data?.email[0]);
+            if (error?.response?.data?.email[0]) {
+              toast.error("Account with this email does not exist!");
+            } else {
+              toast.error("Email not sent");
+            }
           } finally {
             setLoading(false);
           }
@@ -43,9 +47,6 @@ function ForgotPassword() {
                 placeholder="example@domain.com"
                 required
               />
-              {touched.email && (
-                <p className="text-danger mt-2">Please enter a valid email.</p>
-              )}
             </div>
 
             <div className="d-flex justify-content-center mb-3">
