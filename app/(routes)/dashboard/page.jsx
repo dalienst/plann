@@ -1,6 +1,7 @@
 "use client";
 import LoadingSpinner from "@/components/general/LoadingSpinner";
 import AddProject from "@/forms/projects/AddProject";
+import AddTask from "@/forms/tasks/AddTask";
 import { useFetchProfile } from "@/hooks/accounts/actions";
 import { useFetchProjects } from "@/hooks/projects/actions";
 import React, { useState } from "react";
@@ -8,9 +9,13 @@ import Modal from "react-bootstrap/Modal";
 
 function Dashboard() {
   const [show, setShow] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const handleOpen = () => setOpen(true);
+  const handleShut = () => setOpen(false);
 
   const {
     isLoading: isLoadingProfile,
@@ -53,7 +58,32 @@ function Dashboard() {
 
             {/* Action Buttons */}
             <div className="d-flex gap-2">
-              <button className="btn btn-dark">New Task</button>
+              <button onClick={handleOpen} className="btn btn-dark">
+                New Task
+              </button>
+              <Modal
+                show={open}
+                onHide={handleShut}
+                dialogClassName="modal-dialog modal-dialog-centered"
+              >
+                <div className="modal-header">
+                  <h5 className="modal-title">Create Task</h5>
+                  <button
+                    type="button"
+                    className="btn-close"
+                    onClick={handleShut}
+                  ></button>
+                </div>
+
+                <div className="modal-body">
+                  <AddTask
+                    handleModal={handleShut}
+                    refetch={refetchProjects}
+                    projects={projects}
+                  />
+                </div>
+              </Modal>
+
               <button className="btn btn-outline-dark" onClick={handleShow}>
                 New Portfolio
               </button>

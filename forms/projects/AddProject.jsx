@@ -22,9 +22,9 @@ function AddProject({ refetch, handleCloseModal }) {
             await createProject(values, axios);
             refetch();
             handleCloseModal();
-            toast.success("Project created successfully");
+            toast.success("Portfolio created successfully");
           } catch (error) {
-            toast.error("Project creation failed");
+            toast.error("Portfolio creation failed");
           } finally {
             setLoading(false);
           }
