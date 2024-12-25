@@ -2,6 +2,7 @@
 import { resetPassword } from "@/services/accounts";
 import { ResetPassword } from "@/validation";
 import { Field, Form, Formik } from "formik";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
@@ -23,10 +24,14 @@ function PasswordReset() {
           setLoading(true);
           try {
             await resetPassword(values);
-            toast.success("Password reset successfully");
-            router.push("/auth/login");
+            toast?.success("Password reset successfully");
+            // router.push("/auth/login");
           } catch (error) {
-            toast.error("Password reset failed");
+            if (error?.response?.data?.non_field_errors[0]) {
+              toast?.error("Invalid or expired verification code!");
+            } else {
+              toast?.error("Password reset failed");
+            }
           } finally {
             setLoading(false);
           }
