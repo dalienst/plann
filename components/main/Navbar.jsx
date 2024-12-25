@@ -1,4 +1,5 @@
 "use client";
+import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
@@ -36,6 +37,15 @@ function Navbar() {
               >
                 Projects
               </Link>
+            </li>
+
+            <li className="nav-item">
+              <button
+                onClick={() => signOut()}
+                className="nav-link text-danger"
+              >
+                Sign Out
+              </button>
             </li>
           </ul>
         </div>
