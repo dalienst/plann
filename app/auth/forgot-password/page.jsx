@@ -32,7 +32,7 @@ function ForgotPassword() {
         }}
       >
         {({ touched }) => (
-          <Form className="shadow p-4 bg-white rounded">
+          <Form className="shadow p-4 bg-white rounded form">
             <h2 className="text-center mb-4">Forgot Password</h2>
 
             <div className="mb-3">

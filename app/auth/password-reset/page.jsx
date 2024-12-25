@@ -38,7 +38,7 @@ function PasswordReset() {
         }}
       >
         {({ touched }) => (
-          <Form className="shadow p-4 bg-white rounded">
+          <Form className="shadow p-4 bg-white rounded form">
             <h2 className="text-center mb-4">Reset Your Password</h2>
             <p className="text-center mb-4">
               A code has been sent to your email to reset your password.
