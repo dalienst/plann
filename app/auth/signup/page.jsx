@@ -38,7 +38,7 @@ function SignUp() {
         }
       }}
     >
-      {({ values }) => (
+      {({ touched }) => (
         <Form>
           <div className="mb-3">
             <label htmlFor="email" className="form-label">
@@ -50,7 +50,7 @@ function SignUp() {
               id="email"
               name="email"
             />
-            <ErrorMessage name="email" component="p" className="text-danger" />
+            {touched.email && <ErrorMessage name="email" component="p" />}
           </div>
 
           <div className="mb-3">
@@ -63,11 +63,7 @@ function SignUp() {
               id="password"
               name="password"
             />
-            <ErrorMessage
-              name="password"
-              component="p"
-              className="text-danger"
-            />
+            {touched.password && <ErrorMessage name="password" component="p" />}
           </div>
 
           <div className="mb-3">
@@ -80,11 +76,9 @@ function SignUp() {
               id="confirmPassword"
               name="confirmPassword"
             />
-            <ErrorMessage
-              name="confirmPassword"
-              component="p"
-              className="text-danger"
-            />
+            {touched.confirmPassword && (
+              <ErrorMessage name="confirmPassword" component="p" />
+            )}
           </div>
 
           <button
