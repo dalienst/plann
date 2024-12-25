@@ -15,7 +15,10 @@ const RegistrationSchema = Yup.object().shape({
 });
 
 const ResetPassword = Yup.object().shape({
-  code: Yup.string().required("This field is required"),
+  code: Yup.string()
+    .required("This field is required")
+    .min(6, "Invalid code")
+    .max(6, "Invalid code"),
   password: Yup.string()
     .min(5, "Password cannot be less than 5 characters")
     .required("This field is required")

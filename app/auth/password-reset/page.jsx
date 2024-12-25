@@ -25,7 +25,7 @@ function PasswordReset() {
           try {
             await resetPassword(values);
             toast?.success("Password reset successfully");
-            // router.push("/auth/login");
+            router.push("/auth/login");
           } catch (error) {
             if (error?.response?.data?.non_field_errors[0]) {
               toast?.error("Invalid or expired verification code!");
