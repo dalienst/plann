@@ -7,7 +7,7 @@ import React from "react";
 function Navbar() {
   const pathname = usePathname();
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+    <nav className="navbar navbar-expand-lg bg-body-tertiary shadow">
       <div className="container-fluid">
         <Link className="navbar-brand" href="/dashboard">
           Planova
