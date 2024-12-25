@@ -31,7 +31,7 @@ function Login() {
 
   return (
     <div className="auth-screen">
-      <form onSubmit={handleSubmit} className="shadow p-4 bg-white rounded">
+      <form onSubmit={handleSubmit} className="shadow p-4 bg-white rounded form">
         <h2 className="text-center mb-4">Login</h2>
 
         <div className="mb-3">

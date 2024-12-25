@@ -1,9 +1,32 @@
 "use client";
+import LoadingSpinner from "@/components/general/LoadingSpinner";
+import AddProject from "@/forms/projects/AddProject";
 import { useFetchProfile } from "@/hooks/accounts/actions";
-import React from "react";
+import { useFetchProjects } from "@/hooks/projects/actions";
+import React, { useState } from "react";
+import Modal from "react-bootstrap/Modal";
 
 function Dashboard() {
-  const { isLoading: isLoadingProfile, data: profile } = useFetchProfile();
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const {
+    isLoading: isLoadingProfile,
+    data: profile,
+    refetch: refetchProfile,
+  } = useFetchProfile();
+
+  const {
+    isLoading: isLoadingProjects,
+    data: projects,
+    refetch: refetchProjects,
+  } = useFetchProjects();
+
+  if (isLoadingProfile) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <>
@@ -31,7 +54,30 @@ function Dashboard() {
             {/* Action Buttons */}
             <div className="d-flex gap-2">
               <button className="btn btn-dark">New Task</button>
-              <button className="btn btn-outline-dark">New Project</button>
+              <button className="btn btn-outline-dark" onClick={handleShow}>
+                New Portfolio
+              </button>
+              <Modal
+                show={show}
+                onHide={handleClose}
+                dialogClassName="modal-dialog modal-dialog-centered"
+              >
+                <div className="modal-header">
+                  <h5 className="modal-title">Create Portfolio</h5>
+                  <button
+                    type="button"
+                    className="btn-close"
+                    onClick={handleClose}
+                  ></button>
+                </div>
+
+                <div className="modal-body">
+                  <AddProject
+                    handleCloseModal={handleClose}
+                    refetch={refetchProjects}
+                  />
+                </div>
+              </Modal>
             </div>
           </div>
         </section>

@@ -41,7 +41,7 @@ function SignUp() {
         }}
       >
         {({ touched }) => (
-          <Form className="shadow p-4 bg-white">
+          <Form className="shadow p-4 bg-white form">
             <h2 className="text-center mb-4">Sign Up</h2>
             <div className="mb-3">
               <label htmlFor="email" className="form-label">
