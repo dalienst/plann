@@ -2,6 +2,7 @@
 
 import { getProjectDetail, getProjects } from "@/services/projects";
 import useAxiosAuth from "../useAxiosAuth";
+import { useQuery } from "@tanstack/react-query";
 
 export function useFetchProjects() {
   const axios = useAxiosAuth();
