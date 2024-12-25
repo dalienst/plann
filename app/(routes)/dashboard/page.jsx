@@ -24,9 +24,9 @@ function Dashboard() {
     refetch: refetchProjects,
   } = useFetchProjects();
 
-  if (isLoadingProfile) {
-    return <LoadingSpinner />;
-  }
+  console.log(profile);
+
+  if (isLoadingProfile) return <LoadingSpinner />;
 
   return (
     <>
