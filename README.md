@@ -1,3 +1,3 @@
-# plann
+# plannit
 
-Streamline your daily tasks and projects with plann, your all-in-one corporate task management solution.
+Streamline your daily tasks and projects with plannit, your all-in-one corporate task management solution.

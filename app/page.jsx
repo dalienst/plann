@@ -18,7 +18,7 @@ function LandingPage() {
       }}
     >
       <h1 style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>
-        Welcome to plann
+        Welcome to plannit
       </h1>
       <p
         style={{

@@ -12,10 +12,10 @@ function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <title>plann</title>
+        <title>plannit</title>
         <meta
           name="description"
-          content="Streamline your daily tasks and projects with plann, your all-in-one corporate task management solution."
+          content="Streamline your daily tasks and projects with plannit, your all-in-one corporate task management solution."
         />
       </head>
       <body>
