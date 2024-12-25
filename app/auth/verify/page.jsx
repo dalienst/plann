@@ -1,5 +1,6 @@
 "use client";
 import { verifyAccount } from "@/services/accounts";
+import { CodeSchema } from "@/validation";
 import { Field, Form, Formik } from "formik";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
@@ -13,6 +14,7 @@ function VerifyAccount() {
     <div className="auth-screen">
       <Formik
         initialValues={{ code: "" }}
+        validationSchema={CodeSchema}
         onSubmit={async (values) => {
           setLoading(true);
           try {

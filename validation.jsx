@@ -31,4 +31,8 @@ const ResetPassword = Yup.object().shape({
     .oneOf([Yup.ref("password"), null], "Confirm Password does not match"),
 });
 
-export { RegistrationSchema, ResetPassword };
+const CodeSchema = Yup.object().shape({
+  code: Yup.string().required().min(6, "Invalid code").max(6, "Invalid code"),
+});
+
+export { RegistrationSchema, ResetPassword, CodeSchema };
