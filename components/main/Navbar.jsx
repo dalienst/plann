@@ -10,7 +10,7 @@ function Navbar() {
     <nav className="navbar navbar-expand-lg bg-body-tertiary shadow">
       <div className="container-fluid">
         <Link className="navbar-brand" href="/dashboard">
-          Planova
+          plann
         </Link>
 
         <button
