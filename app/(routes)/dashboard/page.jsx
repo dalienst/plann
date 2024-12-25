@@ -16,7 +16,7 @@ function Dashboard() {
     refetch: refetchProjects,
   } = useFetchProjects();
 
-  console.log(projects)
+  console.log(profile)
 
   return <div>Dashboard</div>;
 }
