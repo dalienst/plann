@@ -25,7 +25,6 @@ function AddTask({ refetch, handleModal, projects }) {
             handleModal();
             toast?.success("Task created successfully");
           } catch (error) {
-            console.log(error);
             if (error?.response?.data?.date[0]) {
               toast?.error(error?.response?.data?.date[0]);
             } else {

@@ -42,7 +42,6 @@ function Dashboard() {
     refetch: refetchTasks,
   } = useFetchTasksByDate(date);
 
-  console.log(tasks);
 
   if (isLoadingProfile) return <LoadingSpinner />;
 
