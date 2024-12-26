@@ -1,9 +1,13 @@
 "use client";
 import LoadingSpinner from "@/components/general/LoadingSpinner";
+import DisplayProjects from "@/components/projects/DisplayProjects";
+import DisplayTasks from "@/components/tasks/DisplayTasks";
 import AddProject from "@/forms/projects/AddProject";
 import AddTask from "@/forms/tasks/AddTask";
 import { useFetchProfile } from "@/hooks/accounts/actions";
 import { useFetchProjects } from "@/hooks/projects/actions";
+import { useFetchTasksByDate } from "@/hooks/tasks/actions";
+import Image from "next/image";
 import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 
@@ -17,6 +21,9 @@ function Dashboard() {
   const handleOpen = () => setOpen(true);
   const handleShut = () => setOpen(false);
 
+  const date = new Date().toISOString().split("T")[0];
+  const day = new Date().getDay();
+
   const {
     isLoading: isLoadingProfile,
     data: profile,
@@ -29,37 +36,33 @@ function Dashboard() {
     refetch: refetchProjects,
   } = useFetchProjects();
 
-  console.log(profile);
+  const {
+    isLoading: isLoadingTasks,
+    data: tasks,
+    refetch: refetchTasks,
+  } = useFetchTasksByDate(date);
+
 
   if (isLoadingProfile) return <LoadingSpinner />;
 
   return (
     <>
-      <div className="container py-5 px-4">
-        <section className="mb-3 py-5">
-          {/* Greeting */}
-          <div className="text-center mb-5">
-            <h1 className="h4 mb-1">Welcome, {profile?.email || "User"}!</h1>
-            <p className="text-muted small mb-0">
-              {profile?.is_verified ? "Verified Account" : "Unverified Account"}
-            </p>
+      <div className="container px-4">
+        <section className="mb-3">
+          <div className="mt-5">
+            <h1 className="h2 mb-1">Hello, {profile?.name || "User"}!</h1>
+            <p className="text-muted">{date}</p>
           </div>
+        </section>
 
-          {/* Search Bar and Buttons */}
-          <div className="mb-3 d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3 p-md-4 p-3 bg-light rounded">
-            {/* Search Bar */}
-            <div>
-              <input
-                type="search"
-                className="form-control rounded"
-                placeholder="Search Tasks"
-              />
-            </div>
+        <div className="row">
+          {/* Tasks */}
+          <section className="mb-3 col-md-9 col-sm-12">
+            <div className="d-flex justify-content-between align-items-center mb-3">
+              <h5 className="fw-semibold">Today's Tasks</h5>
 
-            {/* Action Buttons */}
-            <div className="d-flex gap-2">
-              <button onClick={handleOpen} className="btn btn-dark">
-                New Task
+              <button onClick={handleOpen} className="btn btn-dark btn-sm">
+                <i className="bi bi-plus-lg"></i>
               </button>
               <Modal
                 show={open}
@@ -78,14 +81,40 @@ function Dashboard() {
                 <div className="modal-body">
                   <AddTask
                     handleModal={handleShut}
-                    refetch={refetchProjects}
+                    refetch={refetchTasks}
                     projects={projects}
                   />
                 </div>
               </Modal>
+            </div>
 
-              <button className="btn btn-outline-dark" onClick={handleShow}>
-                New Portfolio
+            {isLoadingTasks ? (
+              <LoadingSpinner />
+            ) : tasks && tasks?.length > 0 ? (
+              tasks.map((task) => (
+                <DisplayTasks
+                  key={task.id}
+                  task={task}
+                  refetchTask={refetchTasks}
+                />
+              ))
+            ) : (
+              <p className="p-2 bg-white rounded">
+                You have no tasks for today
+              </p>
+            )}
+          </section>
+
+          {/* Portfolios */}
+          <section className="mb-3 col-md-3 col-sm-12">
+            <div className="d-flex justify-content-between align-items-center mb-3">
+              <h5 className="fw-semibold">Portfolios</h5>
+
+              <button
+                className="btn btn-outline-dark btn-sm"
+                onClick={handleShow}
+              >
+                <i className="bi bi-plus-lg"></i>
               </button>
               <Modal
                 show={show}
@@ -109,8 +138,22 @@ function Dashboard() {
                 </div>
               </Modal>
             </div>
-          </div>
-        </section>
+
+            {isLoadingProjects ? (
+              <LoadingSpinner />
+            ) : projects && projects?.length > 0 ? (
+              projects.map((project) => (
+                <DisplayProjects
+                  key={project.id}
+                  project={project}
+                  refetchProjects={refetchProjects}
+                />
+              ))
+            ) : (
+              <p className="p-2 bg-white rounded">You have no portfolios</p>
+            )}
+          </section>
+        </div>
       </div>
     </>
   );

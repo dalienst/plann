@@ -1,7 +1,7 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosAuth from "../useAxiosAuth";
-import { getTaskDetail, getTasks } from "@/services/tasks";
+import { getTaskDetail, getTasks, getTasksByDate } from "@/services/tasks";
 
 export function useFetchTasks() {
   const axios = useAxiosAuth();
@@ -9,6 +9,15 @@ export function useFetchTasks() {
   return useQuery({
     queryKey: ["tasks"],
     queryFn: () => getTasks(axios),
+  });
+}
+
+export function useFetchTasksByDate(date) {
+  const axios = useAxiosAuth();
+
+  return useQuery({
+    queryKey: ["tasks", date],
+    queryFn: () => getTasksByDate(axios, date),
   });
 }
 

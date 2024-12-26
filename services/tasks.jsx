@@ -10,6 +10,14 @@ export const getTasks = async (axios) => {
   return response?.data?.results || [];
 };
 
+export const getTasksByDate = async (axios, date) => {
+  const response = await apiActions?.get(
+    `/api/tasks/?date=${date}&is_completed=False`,
+    axios
+  );
+  return response?.data?.results || [];
+};
+
 export const getTaskDetail = async (slug, axios) => {
   const response = await apiActions?.get(`/api/tasks/${slug}/`, axios);
   return response?.data || {};
