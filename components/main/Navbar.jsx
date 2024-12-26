@@ -35,7 +35,7 @@ function Navbar() {
                   pathname === "/dashboard" ? "nav-link nav-active" : "nav-link"
                 }`}
               >
-                Projects
+                Portfolios
               </Link>
             </li>
 
