@@ -1,6 +1,7 @@
 import * as Yup from "yup";
 
 const RegistrationSchema = Yup.object().shape({
+  name: Yup.string().required("This field is required"),
   email: Yup.string().email("Invalid email").required("Required"),
   password: Yup.string()
     .min(5, "Password cannot be less than 5 characters")

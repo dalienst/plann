@@ -48,48 +48,19 @@ function Dashboard() {
     <>
       <div className="container px-4">
         <section className="mb-3">
-          {/* <Image
-            src="/nature.svg"
-            className="img-fluid mb-1"
-            alt="logo"
-            width={200}
-            height={100}
-            style={{
-              margin: "0 auto",
-              width: "100%",
-              height: "400px",
-              objectFit: "contain",
-            }}
-          /> */}
-          {/* Greeting */}
-          {/* <div className="text-center mb-5">
-            <h1 className="h4 mb-1">Welcome, {profile?.email || "User"}!</h1>
-            <p className="text-muted small mb-0">
-              {profile?.is_verified ? "Verified Account" : "Unverified Account"}
-            </p>
-            <p>{date}</p>
-          </div> */}
-
           <div className="mt-5">
-            <h1 className="h2 mb-1">Hello, {profile?.email || "User"}!</h1>
+            <h1 className="h2 mb-1">Hello, {profile?.name || "User"}!</h1>
             <p className="text-muted">{date}</p>
           </div>
+        </section>
 
-          {/* Search Bar and Buttons */}
-          <div className="mb-3 d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3 p-md-2 p-2 bg-light rounded">
-            {/* Search Bar */}
-            <div>
-              <input
-                type="search"
-                className="form-control rounded"
-                placeholder="Search Tasks"
-              />
-            </div>
+        <div className="row">
+          <section className="mb-3 col-md-9 col-sm-12">
+            <div className="d-flex justify-content-between align-items-center mb-3">
+              <h5 className="fw-semibold">Today's Tasks</h5>
 
-            {/* Action Buttons */}
-            <div className="d-flex gap-2">
-              <button onClick={handleOpen} className="btn btn-dark">
-                New Task
+              <button onClick={handleOpen} className="btn btn-dark btn-sm">
+                <i className="bi bi-plus-lg"></i>
               </button>
               <Modal
                 show={open}
@@ -113,9 +84,43 @@ function Dashboard() {
                   />
                 </div>
               </Modal>
+            </div>
 
-              <button className="btn btn-outline-dark" onClick={handleShow}>
-                New Portfolio
+            {tasks?.map((task) => (
+              <div
+                key={task.id}
+                className="d-flex justify-content-between align-items-center mb-2 p-2 bg-white rounded"
+              >
+                <div className="form-check">
+                  <input
+                    type="checkbox"
+                    name="is_completed"
+                    id="is_complete"
+                    className="form-check-input"
+                  />
+
+                  <label htmlFor="is_complete" className="form-check-label">
+                    {task.title}
+                  </label>
+                </div>
+
+                <div className="d-flex gap-2">
+                  <i className="bi bi-pencil cursor-pointer"></i>
+                  <i className="bi bi-trash text-danger cursor-pointer"></i>
+                </div>
+              </div>
+            ))}
+          </section>
+
+          <section className="mb-3 col-md-3 col-sm-12">
+            <div className="d-flex justify-content-between align-items-center mb-3">
+              <h5 className="fw-semibold">Portfolios</h5>
+
+              <button
+                className="btn btn-outline-dark btn-sm"
+                onClick={handleShow}
+              >
+                <i className="bi bi-plus-lg"></i>
               </button>
               <Modal
                 show={show}
@@ -139,37 +144,16 @@ function Dashboard() {
                 </div>
               </Modal>
             </div>
-          </div>
-        </section>
 
-        <section className="mb-3">
-          <h5 className="fw-semibold mb-3">Today's Tasks</h5>
-
-          {tasks?.map((task) => (
-            <div
-              key={task.id}
-              className="d-flex justify-content-between align-items-center mb-2 p-2 bg-white rounded"
-            >
-              <div className="form-check">
-                <input
-                  type="checkbox"
-                  name="is_completed"
-                  id="is_complete"
-                  className="form-check-input"
-                />
-
-                <label htmlFor="is_complete" className="form-check-label">
-                  {task.title}
-                </label>
+            {projects?.map((project) => (
+              <div key={project.id} className="mb-2 p-2 bg-white rounded">
+                <h6>
+                  {project?.title} ({project?.tasks?.length})
+                </h6>
               </div>
-
-              <div className="d-flex gap-2">
-                <i className="bi bi-pencil cursor-pointer"></i>
-                <i className="bi bi-trash text-danger cursor-pointer"></i>
-              </div>
-            </div>
-          ))}
-        </section>
+            ))}
+          </section>
+        </div>
       </div>
     </>
   );

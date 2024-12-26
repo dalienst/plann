@@ -15,6 +15,7 @@ function SignUp() {
     <div className="auth-screen">
       <Formik
         initialValues={{
+          name: "",
           email: "",
           password: "",
           confirmPassword: "",
@@ -43,6 +44,24 @@ function SignUp() {
         {({ touched }) => (
           <Form className="shadow p-4 bg-white form">
             <h2 className="text-center mb-4">Sign Up</h2>
+            <div className="mb-3">
+              <label htmlFor="name" className="form-label">
+                Enter Name
+              </label>
+              <Field
+                type="text"
+                className="form-control rounded-0"
+                id="name"
+                name="name"
+              />
+              {touched.name && (
+                <ErrorMessage
+                  name="name"
+                  component="p"
+                  className="text-danger mt-2"
+                />
+              )}
+            </div>
             <div className="mb-3">
               <label htmlFor="email" className="form-label">
                 Enter Email
