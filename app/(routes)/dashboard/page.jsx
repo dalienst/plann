@@ -81,7 +81,7 @@ function Dashboard() {
                 <div className="modal-body">
                   <AddTask
                     handleModal={handleShut}
-                    refetch={refetchProjects}
+                    refetch={refetchTasks}
                     projects={projects}
                   />
                 </div>
