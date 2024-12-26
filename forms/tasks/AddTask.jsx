@@ -69,7 +69,7 @@ function AddTask({ refetch, handleModal, projects }) {
                 as="select"
                 name="project"
                 id="project"
-                className="form-control"
+                className="form-select"
                 required
               >
                 <option value="">Select Portfolio</option>
