@@ -1,20 +1,21 @@
 "use client";
 import useAxiosAuth from "@/hooks/useAxiosAuth";
-import { deleteTask, updateTask } from "@/services/tasks"; // Ensure updateTask is correctly imported
-import React, { useState, useEffect } from "react";
+import { deleteTask, updateTask } from "@/services/tasks";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
+import Modal from "react-bootstrap/Modal";
 
 function DisplayTasks({ task, refetchTask }) {
-  const [deleting, setDeleting] = useState(false);
-  const [isCompleted, setIsCompleted] = useState(task?.is_completed || false); // Set initial state based on task completion
   const axios = useAxiosAuth();
+  const [deleting, setDeleting] = useState(false);
+  const [isCompleted, setIsCompleted] = useState(task?.is_completed || false);
 
   // Handle completion of task
   const handleCompleteTask = async (slug) => {
     try {
-      await updateTask(slug, { is_completed: !isCompleted }, axios); // Toggle completion
-      setIsCompleted((prev) => !prev); // Update local state
-      refetchTask(); // Refetch tasks to update UI
+      await updateTask(slug, { is_completed: !isCompleted }, axios);
+      setIsCompleted((prev) => !prev);
+      refetchTask();
     } catch (error) {
       toast.error("Error updating task");
     }
@@ -43,10 +44,10 @@ function DisplayTasks({ task, refetchTask }) {
         <input
           type="checkbox"
           name="is_completed"
-          id={`is_complete_${task.id}`} // Ensure unique id for each task
+          id={`is_complete_${task.id}`}
           className="form-check-input"
-          checked={isCompleted} // Use state to control the checkbox
-          onChange={() => handleCompleteTask(task.slug)} // Toggle completion on click
+          checked={isCompleted}
+          onChange={() => handleCompleteTask(task.slug)}
         />
         <label htmlFor={`is_complete_${task.id}`} className="form-check-label">
           {task.title}
@@ -54,8 +55,6 @@ function DisplayTasks({ task, refetchTask }) {
       </div>
 
       <div className="d-flex gap-2">
-        <i className="bi bi-pencil cursor-pointer"></i>
-
         <button
           className="btn btn-sm"
           onClick={() => handleDeleteTask(task?.slug)}
