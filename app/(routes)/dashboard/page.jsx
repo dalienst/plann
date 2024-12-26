@@ -42,7 +42,6 @@ function Dashboard() {
     refetch: refetchTasks,
   } = useFetchTasksByDate(date);
 
-
   if (isLoadingProfile) return <LoadingSpinner />;
 
   return (
@@ -82,6 +81,7 @@ function Dashboard() {
                   <AddTask
                     handleModal={handleShut}
                     refetch={refetchTasks}
+                    refetchProjects={refetchProjects}
                     projects={projects}
                   />
                 </div>

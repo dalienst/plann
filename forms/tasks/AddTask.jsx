@@ -5,7 +5,7 @@ import { Field, Form, Formik } from "formik";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 
-function AddTask({ refetch, handleModal, projects }) {
+function AddTask({ refetch, handleModal, projects, refetchProjects }) {
   const [loading, setLoading] = useState(false);
   const axios = useAxiosAuth();
 
@@ -22,6 +22,7 @@ function AddTask({ refetch, handleModal, projects }) {
           try {
             await createTask(values, axios);
             refetch();
+            refetchProjects();
             handleModal();
             toast?.success("Task created successfully");
           } catch (error) {
