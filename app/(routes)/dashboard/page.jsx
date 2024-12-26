@@ -4,6 +4,7 @@ import AddProject from "@/forms/projects/AddProject";
 import AddTask from "@/forms/tasks/AddTask";
 import { useFetchProfile } from "@/hooks/accounts/actions";
 import { useFetchProjects } from "@/hooks/projects/actions";
+import Image from "next/image";
 import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 
@@ -35,8 +36,21 @@ function Dashboard() {
 
   return (
     <>
-      <div className="container py-5 px-4">
-        <section className="mb-3 py-5">
+      <div className="container px-4">
+        <section className="mb-3">
+        <Image
+          src="/nature.svg"
+          className="img-fluid mb-1"
+          alt="logo"
+          width={200}
+          height={100}
+          style={{
+            margin: "0 auto",
+            width: "100%",
+            height: "400px",
+            objectFit: "contain",
+          }}
+        />
           {/* Greeting */}
           <div className="text-center mb-5">
             <h1 className="h4 mb-1">Welcome, {profile?.email || "User"}!</h1>

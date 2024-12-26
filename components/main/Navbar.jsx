@@ -7,10 +7,10 @@ import React from "react";
 function Navbar() {
   const pathname = usePathname();
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary shadow">
+    <nav className="navbar navbar-expand-lg bg-body-tertiary border-bottom">
       <div className="container-fluid">
         <Link className="navbar-brand" href="/dashboard">
-          plannit
+          Plannit
         </Link>
 
         <button
