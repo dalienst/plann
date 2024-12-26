@@ -1,5 +1,6 @@
 "use client";
 import LoadingSpinner from "@/components/general/LoadingSpinner";
+import DisplayTasks from "@/components/tasks/DisplayTasks";
 import AddProject from "@/forms/projects/AddProject";
 import AddTask from "@/forms/tasks/AddTask";
 import { useFetchProfile } from "@/hooks/accounts/actions";
@@ -55,6 +56,7 @@ function Dashboard() {
         </section>
 
         <div className="row">
+          {/* Tasks */}
           <section className="mb-3 col-md-9 col-sm-12">
             <div className="d-flex justify-content-between align-items-center mb-3">
               <h5 className="fw-semibold">Today's Tasks</h5>
@@ -86,32 +88,24 @@ function Dashboard() {
               </Modal>
             </div>
 
-            {tasks?.map((task) => (
-              <div
-                key={task.id}
-                className="d-flex justify-content-between align-items-center mb-2 p-2 bg-white rounded"
-              >
-                <div className="form-check">
-                  <input
-                    type="checkbox"
-                    name="is_completed"
-                    id="is_complete"
-                    className="form-check-input"
-                  />
-
-                  <label htmlFor="is_complete" className="form-check-label">
-                    {task.title}
-                  </label>
-                </div>
-
-                <div className="d-flex gap-2">
-                  <i className="bi bi-pencil cursor-pointer"></i>
-                  <i className="bi bi-trash text-danger cursor-pointer"></i>
-                </div>
-              </div>
-            ))}
+            {isLoadingTasks ? (
+              <LoadingSpinner />
+            ) : tasks && tasks?.length > 0 ? (
+              tasks.map((task) => (
+                <DisplayTasks
+                  key={task.id}
+                  task={task}
+                  refetchTask={refetchTasks}
+                />
+              ))
+            ) : (
+              <p className="p-2 bg-white rounded">
+                You have no tasks for today
+              </p>
+            )}
           </section>
 
+          {/* Portfolios */}
           <section className="mb-3 col-md-3 col-sm-12">
             <div className="d-flex justify-content-between align-items-center mb-3">
               <h5 className="fw-semibold">Portfolios</h5>
@@ -145,13 +139,19 @@ function Dashboard() {
               </Modal>
             </div>
 
-            {projects?.map((project) => (
-              <div key={project.id} className="mb-2 p-2 bg-white rounded">
-                <h6>
-                  {project?.title} ({project?.tasks?.length})
-                </h6>
-              </div>
-            ))}
+            {isLoadingProjects ? (
+              <LoadingSpinner />
+            ) : projects && projects?.length > 0 ? (
+              projects.map((project) => (
+                <div key={project.id} className="mb-2 p-2 bg-white rounded">
+                  <h6>
+                    {project?.title} ({project?.tasks?.length})
+                  </h6>
+                </div>
+              ))
+            ) : (
+              <p className="p-2 bg-white rounded">You have no portfolios</p>
+            )}
           </section>
         </div>
       </div>
