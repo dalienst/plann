@@ -1,5 +1,6 @@
 "use client";
 import LoadingSpinner from "@/components/general/LoadingSpinner";
+import DisplayProjects from "@/components/projects/DisplayProjects";
 import DisplayTasks from "@/components/tasks/DisplayTasks";
 import AddProject from "@/forms/projects/AddProject";
 import AddTask from "@/forms/tasks/AddTask";
@@ -143,11 +144,11 @@ function Dashboard() {
               <LoadingSpinner />
             ) : projects && projects?.length > 0 ? (
               projects.map((project) => (
-                <div key={project.id} className="mb-2 p-2 bg-white rounded">
-                  <h6>
-                    {project?.title} ({project?.tasks?.length})
-                  </h6>
-                </div>
+                <DisplayProjects
+                  key={project.id}
+                  project={project}
+                  refetchProjects={refetchProjects}
+                />
               ))
             ) : (
               <p className="p-2 bg-white rounded">You have no portfolios</p>

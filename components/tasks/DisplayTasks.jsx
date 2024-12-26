@@ -3,7 +3,6 @@ import useAxiosAuth from "@/hooks/useAxiosAuth";
 import { deleteTask, updateTask } from "@/services/tasks";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
-import Modal from "react-bootstrap/Modal";
 
 function DisplayTasks({ task, refetchTask }) {
   const axios = useAxiosAuth();
