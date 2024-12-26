@@ -35,8 +35,9 @@ function VerifyAccount() {
         {({ touched }) => (
           <Form className="shadow p-4 bg-white rounded form">
             <h2 className="text-center mb-4">Verify Your Account</h2>
-            <p className="text-center mb-4">
-              A verification code has been sent to your email.
+            <p className="text-center small mb-4">
+              A verification code has been sent to your email. If you don’t see
+              our email check your spam folder.
             </p>
 
             <div className="mb-3">
