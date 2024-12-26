@@ -4,6 +4,7 @@ import AddProject from "@/forms/projects/AddProject";
 import AddTask from "@/forms/tasks/AddTask";
 import { useFetchProfile } from "@/hooks/accounts/actions";
 import { useFetchProjects } from "@/hooks/projects/actions";
+import { useFetchTasksByDate } from "@/hooks/tasks/actions";
 import Image from "next/image";
 import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
@@ -18,6 +19,9 @@ function Dashboard() {
   const handleOpen = () => setOpen(true);
   const handleShut = () => setOpen(false);
 
+  const date = new Date().toISOString().split("T")[0];
+  const day = new Date().getDay();
+
   const {
     isLoading: isLoadingProfile,
     data: profile,
@@ -30,7 +34,13 @@ function Dashboard() {
     refetch: refetchProjects,
   } = useFetchProjects();
 
-  console.log(profile);
+  const {
+    isLoading: isLoadingTasks,
+    data: tasks,
+    refetch: refetchTasks,
+  } = useFetchTasksByDate(date);
+
+  console.log(tasks);
 
   if (isLoadingProfile) return <LoadingSpinner />;
 
@@ -38,29 +48,35 @@ function Dashboard() {
     <>
       <div className="container px-4">
         <section className="mb-3">
-        <Image
-          src="/nature.svg"
-          className="img-fluid mb-1"
-          alt="logo"
-          width={200}
-          height={100}
-          style={{
-            margin: "0 auto",
-            width: "100%",
-            height: "400px",
-            objectFit: "contain",
-          }}
-        />
+          {/* <Image
+            src="/nature.svg"
+            className="img-fluid mb-1"
+            alt="logo"
+            width={200}
+            height={100}
+            style={{
+              margin: "0 auto",
+              width: "100%",
+              height: "400px",
+              objectFit: "contain",
+            }}
+          /> */}
           {/* Greeting */}
-          <div className="text-center mb-5">
+          {/* <div className="text-center mb-5">
             <h1 className="h4 mb-1">Welcome, {profile?.email || "User"}!</h1>
             <p className="text-muted small mb-0">
               {profile?.is_verified ? "Verified Account" : "Unverified Account"}
             </p>
+            <p>{date}</p>
+          </div> */}
+
+          <div className="mt-5">
+            <h1 className="h2 mb-1">Hello, {profile?.email || "User"}!</h1>
+            <p className="text-muted">{date}</p>
           </div>
 
           {/* Search Bar and Buttons */}
-          <div className="mb-3 d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3 p-md-4 p-3 bg-light rounded">
+          <div className="mb-3 d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3 p-md-2 p-2 bg-light rounded">
             {/* Search Bar */}
             <div>
               <input
@@ -124,6 +140,35 @@ function Dashboard() {
               </Modal>
             </div>
           </div>
+        </section>
+
+        <section className="mb-3">
+          <h5 className="fw-semibold mb-3">Today's Tasks</h5>
+
+          {tasks?.map((task) => (
+            <div
+              key={task.id}
+              className="d-flex justify-content-between align-items-center mb-2 p-2 bg-white rounded"
+            >
+              <div className="form-check">
+                <input
+                  type="checkbox"
+                  name="is_completed"
+                  id="is_complete"
+                  className="form-check-input"
+                />
+
+                <label htmlFor="is_complete" className="form-check-label">
+                  {task.title}
+                </label>
+              </div>
+
+              <div className="d-flex gap-2">
+                <i className="bi bi-pencil cursor-pointer"></i>
+                <i className="bi bi-trash text-danger cursor-pointer"></i>
+              </div>
+            </div>
+          ))}
         </section>
       </div>
     </>
