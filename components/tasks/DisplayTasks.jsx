@@ -39,9 +39,10 @@ function DisplayTasks({ task, refetchTask }) {
       key={task.id}
       className="d-flex justify-content-between align-items-center mb-2 p-2 bg-white rounded"
     >
-      <div className="form-check">
+      <div className="form-check form-switch">
         <input
           type="checkbox"
+          role="switch"
           name="is_completed"
           id={`is_complete_${task.id}`}
           className="form-check-input"
