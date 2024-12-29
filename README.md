@@ -1,6 +1,6 @@
-# Plannit
+# PlannIt
 
-Streamline your daily tasks and projects with Plannit, your all-in-one corporate task management solution.
+Streamline your daily tasks and projects with PlannIt, your all-in-one corporate task management solution.
 
 ## Features
 

@@ -10,7 +10,7 @@ function Navbar() {
     <nav className="navbar navbar-expand-lg bg-white border-bottom">
       <div className="container-fluid">
         <Link className="navbar-brand" href="/dashboard">
-          Plannit
+          PlannIt
         </Link>
 
         <button
@@ -30,9 +30,11 @@ function Navbar() {
           <ul className="navbar-nav">
             <li className="nav-item">
               <Link
-                href="/dashboard"
+                href="/portfolios"
                 className={`${
-                  pathname === "/dashboard" ? "nav-link nav-active" : "nav-link"
+                  pathname === "/portfolios"
+                    ? "nav-link nav-active"
+                    : "nav-link"
                 }`}
               >
                 Portfolios

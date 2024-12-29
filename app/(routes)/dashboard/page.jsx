@@ -7,7 +7,6 @@ import AddTask from "@/forms/tasks/AddTask";
 import { useFetchProfile } from "@/hooks/accounts/actions";
 import { useFetchProjects } from "@/hooks/projects/actions";
 import { useFetchTasksByDate } from "@/hooks/tasks/actions";
-import Image from "next/image";
 import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 
@@ -22,7 +21,6 @@ function Dashboard() {
   const handleShut = () => setOpen(false);
 
   const date = new Date().toISOString().split("T")[0];
-  const day = new Date().getDay();
 
   const {
     isLoading: isLoadingProfile,
@@ -48,7 +46,7 @@ function Dashboard() {
     <>
       <div className="container px-4">
         <section className="mb-3">
-          <div className="mt-5">
+          <div className="mt-3">
             <h1 className="h2 mb-1">Hello, {profile?.name || "User"}!</h1>
             <p className="text-muted">{date}</p>
           </div>

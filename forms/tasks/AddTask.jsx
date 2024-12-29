@@ -47,6 +47,7 @@ function AddTask({ refetch, handleModal, projects, refetchProjects }) {
                 type="date"
                 className="form-control"
                 required
+                placeholder="yyyy-mm-dd"
               />
             </div>
 
@@ -59,6 +60,7 @@ function AddTask({ refetch, handleModal, projects, refetchProjects }) {
                 type="text"
                 className="form-control"
                 required
+                placeholder="Enter task title"
               />
             </div>
 
