@@ -20,6 +20,7 @@ function PortfolioDetail({ params }) {
 
   const [show, setShow] = useState(false);
   const [deleting, setDeleting] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -48,6 +49,10 @@ function PortfolioDetail({ params }) {
       setDeleting(false);
     }
   };
+
+  const filteredTasks = portfolio?.tasks?.filter((task) =>
+    task.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   if (isLoadingProjects || isLoadingPortfolio) return <LoadingSpinner />;
 
@@ -105,14 +110,22 @@ function PortfolioDetail({ params }) {
           </div>
         </section>
 
-        {/* search bar section */}
-        <section className="mb-3">
-          <input type="search" name="" id="" className="form-control" />
+        {/* Search bar section */}
+        <section className="mb-3 col-md-3">
+          <input
+            type="search"
+            name="search"
+            id="search"
+            className="form-control"
+            placeholder="Search Tasks"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
         </section>
 
         <section className="mb-3">
-          {portfolio?.tasks?.length > 0 ? (
-            portfolio?.tasks?.map((task) => (
+          {filteredTasks?.length > 0 ? (
+            filteredTasks?.map((task) => (
               <DisplayTasks
                 key={task?.id}
                 task={task}

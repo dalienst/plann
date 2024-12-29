@@ -94,8 +94,6 @@ function UpdateTask({ task, refetch, closeModal, projects }) {
               name="project"
               id="project"
               className="form-select"
-              defaultValue={task?.project?.slug || ""}
-              required
             >
               <option value="" disabled>
                 Select a portfolio

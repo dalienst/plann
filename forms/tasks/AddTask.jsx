@@ -73,7 +73,6 @@ function AddTask({ refetch, handleModal, projects, refetchProjects }) {
                 name="project"
                 id="project"
                 className="form-select"
-                required
               >
                 <option value="">Select Portfolio</option>
                 {projects?.map((project) => (
