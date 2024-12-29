@@ -6,6 +6,7 @@ import {
   useFetchProjectDetail,
   useFetchProjects,
 } from "@/hooks/projects/actions";
+import useAxiosAuth from "@/hooks/useAxiosAuth";
 import { deleteProject } from "@/services/projects";
 import { useRouter } from "next/navigation";
 import React, { use, useState } from "react";
@@ -15,6 +16,7 @@ import toast from "react-hot-toast";
 function PortfolioDetail({ params }) {
   const portSlug = use(params);
   const router = useRouter();
+  const axios = useAxiosAuth();
 
   const [show, setShow] = useState(false);
   const [deleting, setDeleting] = useState(false);
@@ -33,7 +35,6 @@ function PortfolioDetail({ params }) {
     data: portfolio,
     refetch: refetchPortfolio,
   } = useFetchProjectDetail(portSlug?.portSlug);
-
 
   const handleDeletePortfolio = async (slug) => {
     setDeleting(true);
@@ -87,10 +88,19 @@ function PortfolioDetail({ params }) {
             </Modal>
 
             <button
-              className="btn btn-danger btn-sm ms-2"
+              className="btn btn-sm btn-outline-danger ms-2"
               onClick={() => handleDeletePortfolio(portfolio?.slug)}
             >
-              <i className="bi bi-trash"></i>
+              {deleting ? (
+                <div
+                  className="spinner-border spinner-border-sm text-danger"
+                  role="status"
+                >
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              ) : (
+                <i className="bi bi-trash"></i>
+              )}
             </button>
           </div>
         </section>
