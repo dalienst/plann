@@ -54,7 +54,7 @@ function Dashboard() {
 
         <div className="row">
           {/* Tasks */}
-          <section className="mb-3 col-md-9 col-sm-12">
+          <section className="mb-3 col-md-7 col-sm-12">
             <div className="d-flex justify-content-between align-items-center mb-3">
               <h5 className="fw-semibold">Today's Tasks</h5>
 
@@ -105,7 +105,7 @@ function Dashboard() {
           </section>
 
           {/* Portfolios */}
-          <section className="mb-3 col-md-3 col-sm-12">
+          <section className="mb-3 col-md-5 col-sm-12">
             <div className="d-flex justify-content-between align-items-center mb-3">
               <h5 className="fw-semibold">Portfolios</h5>
 

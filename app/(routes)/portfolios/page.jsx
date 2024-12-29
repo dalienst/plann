@@ -3,44 +3,14 @@ import LoadingSpinner from "@/components/general/LoadingSpinner";
 import DisplayProjects from "@/components/projects/DisplayProjects";
 import AddProject from "@/forms/projects/AddProject";
 import { useFetchProjects } from "@/hooks/projects/actions";
-import useAxiosAuth from "@/hooks/useAxiosAuth";
-import { deleteProject } from "@/services/projects";
 import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
-import toast from "react-hot-toast";
 
 function Portfolios() {
-  const axios = useAxiosAuth();
   const [show, setShow] = useState(false);
-  const [showEditModal, setShowEditModal] = useState(false);
-  const [editingPortfolio, setEditingPortfolio] = useState(null);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-  const handleEditModalClose = () => {
-    setShowEditModal(false);
-    setEditingPortfolio(null);
-  };
-  const handleEditModalShow = (portfolio) => {
-    setEditingPortfolio(portfolio);
-    setShowEditModal(true);
-  };
-
-  const [deleting, setDeleting] = useState(false);
-
-  const handleDeletePortfolio = async (slug) => {
-    setDeleting((prev) => ({ ...prev, [slug]: true }));
-    try {
-      await deleteProject(slug, axios);
-      toast.success("Portfolio deleted successfully");
-      refetchPortfolios();
-    } catch (error) {
-      toast.error("Error deleting Portfolio");
-    } finally {
-      setDeleting((prev) => ({ ...prev, [slug]: false }));
-    }
-  };
 
   const {
     isLoading: isLoadingPortfolios,

@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import Modal from "react-bootstrap/Modal";
 import UpdateProject from "@/forms/projects/UpdateProject";
+import Link from "next/link";
 
 function DisplayProjects({ portfolio, refetchPortfolios }) {
   const axios = useAxiosAuth();
@@ -41,8 +42,13 @@ function DisplayProjects({ portfolio, refetchPortfolios }) {
         className="mb-2 p-2 bg-white rounded d-flex justify-content-between align-items-center"
       >
         <div>
-          <h6>
-            {portfolio?.title} ({portfolio?.tasks?.length})
+          <h6 className="text-decoration-none">
+            <Link
+              href={`/portfolios/${portfolio.slug}`}
+              className="text-decoration-none"
+            >
+              {portfolio?.title} ({portfolio?.tasks?.length})
+            </Link>
           </h6>
         </div>
 
