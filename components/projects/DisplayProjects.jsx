@@ -4,6 +4,7 @@ import { deleteProject } from "@/services/projects";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import Modal from "react-bootstrap/Modal";
+import UpdateProject from "@/forms/projects/UpdateProject";
 
 function DisplayProjects({ portfolio, refetchPortfolios }) {
   const axios = useAxiosAuth();
@@ -89,7 +90,13 @@ function DisplayProjects({ portfolio, refetchPortfolios }) {
               onClick={handleEditModalClose}
             ></button>
           </div>
-          <div className="modal-body"></div>
+          <div className="modal-body">
+            <UpdateProject
+              portfolio={editingPortfolio}
+              refetchPortfolios={refetchPortfolios}
+              closeModal={handleEditModalClose}
+            />
+          </div>
         </Modal>
       )}
     </>

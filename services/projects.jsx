@@ -15,8 +15,8 @@ export const getProjectDetail = async (slug, axios) => {
   return response?.data || {};
 };
 
-export const updateProject = async (slug, values, axios) => {
-  await apiActions?.patch(`/api/projects/${slug}/`, values, axios);
+export const updateProject = async (slug, formData, axios) => {
+  await apiActions?.patch(`/api/projects/${slug}/`, formData, axios);
 };
 
 export const deleteProject = async (slug, axios) => {
