@@ -143,8 +143,8 @@ function Dashboard() {
               projects.map((project) => (
                 <DisplayProjects
                   key={project.id}
-                  project={project}
-                  refetchProjects={refetchProjects}
+                  portfolio={project}
+                  refetchPortfolios={refetchProjects}
                 />
               ))
             ) : (

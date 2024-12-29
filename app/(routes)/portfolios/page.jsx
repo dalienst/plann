@@ -36,7 +36,6 @@ function Portfolios() {
       toast.success("Portfolio deleted successfully");
       refetchPortfolios();
     } catch (error) {
-      console.log(error);
       toast.error("Error deleting Portfolio");
     } finally {
       setDeleting((prev) => ({ ...prev, [slug]: false }));
