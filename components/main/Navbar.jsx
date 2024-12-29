@@ -42,6 +42,19 @@ function Navbar() {
             </li>
 
             <li className="nav-item">
+              <Link
+                href="/tasks"
+                className={`${
+                  pathname === "/tasks"
+                    ? "nav-link nav-active"
+                    : "nav-link"
+                }`}
+              >
+                Tasks
+              </Link>
+            </li>
+
+            <li className="nav-item">
               <button
                 onClick={() => signOut()}
                 className="nav-link text-danger"
