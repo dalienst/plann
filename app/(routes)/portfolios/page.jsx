@@ -11,9 +11,21 @@ import toast from "react-hot-toast";
 function Portfolios() {
   const axios = useAxiosAuth();
   const [show, setShow] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [editingPortfolio, setEditingPortfolio] = useState(null);
+
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const handleEditModalClose = () => {
+    setShowEditModal(false);
+    setEditingPortfolio(null);
+  };
+  const handleEditModalShow = (portfolio) => {
+    setEditingPortfolio(portfolio);
+    setShowEditModal(true);
+  };
 
   const [deleting, setDeleting] = useState(false);
 
@@ -88,7 +100,15 @@ function Portfolios() {
                     </h6>
                   </div>
 
-                  <div>
+                  <div className="d-flex gap-2">
+                    <button
+                      className="btn btn-sm"
+                      onClick={() => handleEditModalShow(portfolio)}
+                    >
+                      <i className="bi bi-pencil"></i>
+                    </button>
+
+                    {/* Delete Button */}
                     <button
                       className="btn btn-sm"
                       onClick={() => handleDeletePortfolio(portfolio.slug)}
@@ -113,6 +133,27 @@ function Portfolios() {
             <p className="p-2 bg-white rounded">You have no portfolios</p>
           )}
         </section>
+
+        {/* Edit Portfolio Modal */}
+        {editingPortfolio && (
+          <Modal
+            show={showEditModal}
+            onHide={handleEditModalClose}
+            dialogClassName="modal-dialog modal-dialog-centered"
+          >
+            <div className="modal-header">
+              <h5 className="modal-title">
+                Edit Portfolio: {editingPortfolio.title}
+              </h5>
+              <button
+                type="button"
+                className="btn-close"
+                onClick={handleEditModalClose}
+              ></button>
+            </div>
+            <div className="modal-body"></div>
+          </Modal>
+        )}
       </div>
     </>
   );
