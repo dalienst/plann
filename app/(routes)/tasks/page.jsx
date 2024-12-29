@@ -9,6 +9,7 @@ import Modal from "react-bootstrap/Modal";
 
 function Tasks() {
   const [open, setOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleOpen = () => setOpen(true);
   const handleShut = () => setOpen(false);
@@ -24,6 +25,10 @@ function Tasks() {
     data: projects,
     refetch: refetchProjects,
   } = useFetchProjects();
+
+  const filteredTasks = tasks?.filter((task) =>
+    task?.title?.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   if (isLoadingTasks) return <LoadingSpinner />;
 
@@ -63,9 +68,21 @@ function Tasks() {
         </Modal>
       </section>
 
+      <section className="mb-3 col-md-3">
+        <input
+          type="search"
+          name="search"
+          id="search"
+          className="form-control"
+          placeholder="Search Tasks"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+      </section>
+
       <section className="mb-3">
-        {tasks?.length > 0 ? (
-          tasks?.map((task) => (
+        {filteredTasks?.length > 0 ? (
+          filteredTasks?.map((task) => (
             <DisplayTasks
               key={task.id}
               task={task}
