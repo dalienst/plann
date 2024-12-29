@@ -65,6 +65,26 @@ function UpdateTask({ task, refetch, closeModal, projects }) {
             />
           </div>
 
+          <div className="form-check form-switch mb-3">
+            <Field name="is_completed">
+              {({ field, form }) => (
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  role="switch"
+                  id="is_completed"
+                  checked={field?.value}
+                  onChange={(e) =>
+                    form.setFieldValue("is_completed", e.target.checked)
+                  }
+                />
+              )}
+            </Field>
+            <label className="form-check-label" htmlFor="is_completed">
+              Completed
+            </label>
+          </div>
+
           <div className="mb-3">
             <label htmlFor="project" className="form-label">
               Task Portfolio
