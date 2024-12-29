@@ -1,5 +1,6 @@
 "use client";
 import LoadingSpinner from "@/components/general/LoadingSpinner";
+import DisplayProjects from "@/components/projects/DisplayProjects";
 import AddProject from "@/forms/projects/AddProject";
 import { useFetchProjects } from "@/hooks/projects/actions";
 import useAxiosAuth from "@/hooks/useAxiosAuth";
@@ -13,7 +14,6 @@ function Portfolios() {
   const [show, setShow] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [editingPortfolio, setEditingPortfolio] = useState(null);
-
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -89,70 +89,17 @@ function Portfolios() {
           {portfolios?.length > 0 ? (
             <>
               {portfolios?.map((portfolio) => (
-                <div
-                  key={portfolio?.id}
-                  className="mb-2 p-2 bg-white rounded d-flex justify-content-between align-items-center"
-                >
-                  <div>
-                    <h6>
-                      {portfolio?.title} ({portfolio?.tasks?.length})
-                    </h6>
-                  </div>
-
-                  <div className="d-flex gap-2">
-                    <button
-                      className="btn btn-sm"
-                      onClick={() => handleEditModalShow(portfolio)}
-                    >
-                      <i className="bi bi-pencil"></i>
-                    </button>
-
-                    {/* Delete Button */}
-                    <button
-                      className="btn btn-sm"
-                      onClick={() => handleDeletePortfolio(portfolio.slug)}
-                      disabled={deleting[portfolio.slug]}
-                    >
-                      {deleting[portfolio.slug] ? (
-                        <div
-                          className="spinner-border spinner-border-sm text-danger"
-                          role="status"
-                        >
-                          <span className="visually-hidden">Loading...</span>
-                        </div>
-                      ) : (
-                        <i className="bi bi-trash text-danger"></i>
-                      )}
-                    </button>
-                  </div>
-                </div>
+                <DisplayProjects
+                  key={portfolio.id}
+                  portfolio={portfolio}
+                  refetchPortfolios={refetchPortfolios}
+                />
               ))}
             </>
           ) : (
             <p className="p-2 bg-white rounded">You have no portfolios</p>
           )}
         </section>
-
-        {/* Edit Portfolio Modal */}
-        {editingPortfolio && (
-          <Modal
-            show={showEditModal}
-            onHide={handleEditModalClose}
-            dialogClassName="modal-dialog modal-dialog-centered"
-          >
-            <div className="modal-header">
-              <h5 className="modal-title">
-                Edit Portfolio: {editingPortfolio.title}
-              </h5>
-              <button
-                type="button"
-                className="btn-close"
-                onClick={handleEditModalClose}
-              ></button>
-            </div>
-            <div className="modal-body"></div>
-          </Modal>
-        )}
       </div>
     </>
   );
