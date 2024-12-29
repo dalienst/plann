@@ -1,7 +1,11 @@
 "use client";
 import LoadingSpinner from "@/components/general/LoadingSpinner";
+import DisplayTasks from "@/components/tasks/DisplayTasks";
 import AddTask from "@/forms/projects/AddTask";
-import { useFetchProjectDetail } from "@/hooks/projects/actions";
+import {
+  useFetchProjectDetail,
+  useFetchProjects,
+} from "@/hooks/projects/actions";
 import { deleteProject } from "@/services/projects";
 import { useRouter } from "next/navigation";
 import React, { use, useState } from "react";
@@ -19,10 +23,17 @@ function PortfolioDetail({ params }) {
   const handleShow = () => setShow(true);
 
   const {
+    isLoading: isLoadingProjects,
+    data: projects,
+    refetch: refetchProjects,
+  } = useFetchProjects();
+
+  const {
     isLoading: isLoadingPortfolio,
     data: portfolio,
     refetch: refetchPortfolio,
   } = useFetchProjectDetail(portSlug?.portSlug);
+
 
   const handleDeletePortfolio = async (slug) => {
     setDeleting(true);
@@ -37,7 +48,7 @@ function PortfolioDetail({ params }) {
     }
   };
 
-  if (isLoadingPortfolio) return <LoadingSpinner />;
+  if (isLoadingProjects || isLoadingPortfolio) return <LoadingSpinner />;
 
   return (
     <>
@@ -82,6 +93,28 @@ function PortfolioDetail({ params }) {
               <i className="bi bi-trash"></i>
             </button>
           </div>
+        </section>
+
+        {/* search bar section */}
+        <section className="mb-3">
+          <input type="search" name="" id="" className="form-control" />
+        </section>
+
+        <section className="mb-3">
+          {portfolio?.tasks?.length > 0 ? (
+            portfolio?.tasks?.map((task) => (
+              <DisplayTasks
+                key={task?.id}
+                task={task}
+                refetchTask={refetchPortfolio}
+                projects={projects}
+              />
+            ))
+          ) : (
+            <p className="p-2 bg-white rounded">
+              No Tasks created for this portfolio yet
+            </p>
+          )}
         </section>
       </div>
     </>

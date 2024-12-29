@@ -94,18 +94,14 @@ function UpdateTask({ task, refetch, closeModal, projects }) {
               name="project"
               id="project"
               className="form-select"
-              defaultValue={task?.project?.slug}
+              defaultValue={task?.project?.slug || ""}
               required
             >
               <option value="" disabled>
                 Select a portfolio
               </option>
               {projects?.map((project) => (
-                <option
-                  value={project?.slug}
-                  key={project?.id}
-                  selected={task?.project?.slug === project?.slug}
-                >
+                <option value={project?.slug} key={project?.id}>
                   {project?.title}
                 </option>
               ))}
