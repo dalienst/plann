@@ -12,10 +12,10 @@ function DisplayProjects({ project, refetchProjects }) {
     setDeleting((prev) => ({ ...prev, [slug]: true }));
     try {
       await deleteProject(slug, axios);
-      toast.success("Project deleted successfully");
+      toast.success("Portfolio deleted successfully");
       refetchProjects();
     } catch (error) {
-      toast.error("Error deleting project");
+      toast.error("Error deleting Portfolio");
     } finally {
       setDeleting((prev) => ({ ...prev, [slug]: false }));
     }
