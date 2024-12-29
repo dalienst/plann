@@ -5,7 +5,7 @@ import { Field, Form, Formik } from "formik";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 
-function AddTask({ refetch, handleModal, projects, refetchProjects }) {
+function AddTask({ refetch, handleModal, projectSlug }) {
   const [loading, setLoading] = useState(false);
   const axios = useAxiosAuth();
 
@@ -13,7 +13,7 @@ function AddTask({ refetch, handleModal, projects, refetchProjects }) {
     <>
       <Formik
         initialValues={{
-          project: "",
+          project: projectSlug,
           title: "",
           date: "",
         }}
@@ -22,7 +22,6 @@ function AddTask({ refetch, handleModal, projects, refetchProjects }) {
           try {
             await createTask(values, axios);
             refetch();
-            refetchProjects();
             handleModal();
             toast?.success("Task created successfully");
           } catch (error) {
@@ -62,29 +61,6 @@ function AddTask({ refetch, handleModal, projects, refetchProjects }) {
                 required
                 placeholder="Enter task title"
               />
-            </div>
-
-            <div className="mb-3">
-              <label htmlFor="project" className="form-label">
-                Task Portfolio
-              </label>
-              <Field
-                as="select"
-                name="project"
-                id="project"
-                className="form-select"
-              >
-                <option value="">Select Portfolio</option>
-                {projects?.map((project) => (
-                  <option
-                    value={project?.slug}
-                    id={project?.slug}
-                    key={project?.id}
-                  >
-                    {project?.title}
-                  </option>
-                ))}
-              </Field>
             </div>
 
             <div className="d-flex justify-content-center mb-3">

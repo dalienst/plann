@@ -7,7 +7,6 @@ import AddTask from "@/forms/tasks/AddTask";
 import { useFetchProfile } from "@/hooks/accounts/actions";
 import { useFetchProjects } from "@/hooks/projects/actions";
 import { useFetchTasksByDate } from "@/hooks/tasks/actions";
-import Image from "next/image";
 import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 
@@ -22,7 +21,6 @@ function Dashboard() {
   const handleShut = () => setOpen(false);
 
   const date = new Date().toISOString().split("T")[0];
-  const day = new Date().getDay();
 
   const {
     isLoading: isLoadingProfile,
@@ -48,7 +46,7 @@ function Dashboard() {
     <>
       <div className="container px-4">
         <section className="mb-3">
-          <div className="mt-5">
+          <div className="mt-3">
             <h1 className="h2 mb-1">Hello, {profile?.name || "User"}!</h1>
             <p className="text-muted">{date}</p>
           </div>
@@ -56,7 +54,7 @@ function Dashboard() {
 
         <div className="row">
           {/* Tasks */}
-          <section className="mb-3 col-md-9 col-sm-12">
+          <section className="mb-3 col-md-7 col-sm-12">
             <div className="d-flex justify-content-between align-items-center mb-3">
               <h5 className="fw-semibold">Today's Tasks</h5>
 
@@ -96,6 +94,7 @@ function Dashboard() {
                   key={task.id}
                   task={task}
                   refetchTask={refetchTasks}
+                  projects={projects}
                 />
               ))
             ) : (
@@ -106,7 +105,7 @@ function Dashboard() {
           </section>
 
           {/* Portfolios */}
-          <section className="mb-3 col-md-3 col-sm-12">
+          <section className="mb-3 col-md-5 col-sm-12">
             <div className="d-flex justify-content-between align-items-center mb-3">
               <h5 className="fw-semibold">Portfolios</h5>
 
@@ -145,8 +144,8 @@ function Dashboard() {
               projects.map((project) => (
                 <DisplayProjects
                   key={project.id}
-                  project={project}
-                  refetchProjects={refetchProjects}
+                  portfolio={project}
+                  refetchPortfolios={refetchProjects}
                 />
               ))
             ) : (
