@@ -36,7 +36,7 @@ function Tasks() {
     <div className="container px-4">
       <section className="d-flex justify-content-between align-items-center mt-3 mb-3">
         <div>
-          <h1 className="h2 mb-1">Your Portfolios</h1>
+          <h1 className="h2 mb-1">Your Tasks</h1>
         </div>
 
         <button onClick={handleOpen} className="btn btn-dark btn-sm">

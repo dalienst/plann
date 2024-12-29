@@ -14,7 +14,7 @@ function UpdateTask({ task, refetch, closeModal, projects }) {
         title: task?.title || "",
         date: task?.date || "",
         is_completed: task?.is_completed || false,
-        project: task?.project || null,
+        project: task?.project || "",
       }}
       onSubmit={async (values) => {
         setLoading(true);
@@ -95,9 +95,15 @@ function UpdateTask({ task, refetch, closeModal, projects }) {
               id="project"
               className="form-select"
             >
-              <option value="" disabled>
-                Select a portfolio
-              </option>
+              {task?.project ? (
+                <option value={task?.project} disabled>
+                  {task?.project || "Select a project"}
+                </option>
+              ) : (
+                <option value="" disabled>
+                  Select a project
+                </option>
+              )}
               {projects?.map((project) => (
                 <option value={project?.slug} key={project?.id}>
                   {project?.title}
