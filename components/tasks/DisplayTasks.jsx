@@ -4,8 +4,9 @@ import { deleteTask, updateTask } from "@/services/tasks";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import Modal from "react-bootstrap/Modal";
+import UpdateTask from "@/forms/tasks/UpdateTask";
 
-function DisplayTasks({ task, refetchTask }) {
+function DisplayTasks({ task, refetchTask, projects }) {
   const axios = useAxiosAuth();
   const [deleting, setDeleting] = useState(false);
   const [isCompleted, setIsCompleted] = useState(task?.is_completed || false);
@@ -103,14 +104,20 @@ function DisplayTasks({ task, refetchTask }) {
           dialogClassName="modal-dialog modal-dialog-centered"
         >
           <div className="modal-header">
-            <h5 className="modal-title">
-              Edit Task: {editingTask?.title}
-            </h5>
+            <h5 className="modal-title">Edit Task: {editingTask?.title}</h5>
             <button
               type="button"
               className="btn-close"
               onClick={handleEditModalClose}
             ></button>
+          </div>
+          <div className="modal-body">
+            <UpdateTask
+              task={editingTask}
+              refetch={refetchTask}
+              closeModal={handleEditModalClose}
+              projects={projects}
+            />
           </div>
         </Modal>
       )}

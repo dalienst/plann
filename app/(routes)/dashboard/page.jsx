@@ -94,6 +94,7 @@ function Dashboard() {
                   key={task.id}
                   task={task}
                   refetchTask={refetchTasks}
+                  projects={projects}
                 />
               ))
             ) : (
