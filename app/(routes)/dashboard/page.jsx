@@ -20,7 +20,15 @@ function Dashboard() {
   const handleOpen = () => setOpen(true);
   const handleShut = () => setOpen(false);
 
-  const date = new Date().toISOString().split("T")[0];
+  const date = new Date()
+    .toLocaleDateString("en-KE", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    })
+    .split("/")
+    .reverse()
+    .join("-");
 
   const {
     isLoading: isLoadingProfile,
